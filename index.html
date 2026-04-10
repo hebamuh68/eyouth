@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Of The Week</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Inter",sans-serif;
+}
+
+body{
+background-image:url("./background.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+min-height:100vh;
+color:white;
+}
+
+.overlay{
+min-height:100vh;
+padding:40px 20px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+margin-top:40px;
+margin-bottom:60px;
+}
+
+.header h1{
+font-size:52px;
+font-weight:600;
+letter-spacing:.5px;
+}
+
+.week{
+margin-top:10px;
+opacity:.8;
+font-size:16px;
+}
+
+.students{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:35px;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.student{
+text-align:center;
+transition:.3s ease;
+}
+
+.student:hover{
+transform:translateY(-12px);
+}
+
+.avatar{
+width:150px;
+height:150px;
+border-radius:50%;
+overflow:hidden;
+margin:auto;
+border:4px solid rgba(255,255,255,.15);
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+background:white;
+}
+
+.main{
+width:200px;
+height:200px;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.label{
+margin-top:18px;
+padding:8px 18px;
+border-radius:30px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(8px);
+border:1px solid rgba(255,255,255,.2);
+font-size:13px;
+font-weight:500;
+display:inline-block;
+}
+
+.name{
+margin-top:10px;
+font-weight:600;
+font-size:16px;
+}
+
+.footer{
+text-align:center;
+margin-top:70px;
+opacity:.7;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="container">
+
+<div class="header">
+<h1>Student of The Week</h1>
+<div class="week">Week 1 — Introduction to Programming</div>
+</div>
+
+<div class="students">
+
+<div class="student">
+<div class="avatar">
+<img src="https://i.pravatar.cc/300?img=5">
+</div>
+<div class="label">Most Active</div>
+<div class="name">Sara Ali</div>
+</div>
+
+<div class="student">
+<div class="avatar main">
+<img src="https://i.pravatar.cc/300?img=12">
+</div>
+<div class="label">Student of Week</div>
+<div class="name">Ahmed Mohamed</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://i.pravatar.cc/300?img=7">
+</div>
+<div class="label">Most Improved</div>
+<div class="name">Omar Khaled</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://i.pravatar.cc/300?img=9">
+</div>
+<div class="label">Creative Thinker</div>
+<div class="name">Mariam Hassan</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://i.pravatar.cc/300?img=11">
+</div>
+<div class="label">Best Problem Solver</div>
+<div class="name">Youssef Ahmed</div>
+</div>
+
+</div>
+
+<div class="footer">
+eYouth — Digital Egypt Youth
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
