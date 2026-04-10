@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Student Of The Week</title>
+<title>Self Learning Achievers</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -29,21 +29,19 @@ overflow:hidden;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("./background.jpg") no-repeat center center;
-  /* Change 'contain' to 'cover' */
-  background-size: cover; 
-  background-color: #0b1e3a;
-  z-index: -1;
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("./background.jpg") no-repeat center center;
+background-size:cover;
+background-color:#0b1e3a;
+z-index:-1;
 }
 
-
-/* container centered */
+/* container */
 
 .container{
 text-align:center;
@@ -59,7 +57,7 @@ margin-bottom:50px;
 }
 
 .header h1{
-font-size:48px;
+font-size:44px;
 font-weight:600;
 }
 
@@ -74,7 +72,7 @@ opacity:.8;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:40px;
+gap:35px;
 flex-wrap:wrap;
 margin-top:40px;
 }
@@ -91,19 +89,14 @@ transform:translateY(-10px);
 /* avatars */
 
 .avatar{
-width:140px;
-height:140px;
+width:120px;
+height:120px;
 border-radius:50%;
 overflow:hidden;
 margin:auto;
 border:4px solid rgba(255,255,255,.2);
 box-shadow:0 15px 35px rgba(0,0,0,.25);
 background:white;
-}
-
-.main{
-width:180px;
-height:180px;
 }
 
 .avatar img{
@@ -130,6 +123,10 @@ display:inline-block;
 .name{
 margin-top:8px;
 font-weight:600;
+font-size:14px;
+max-width:150px;
+margin-left:auto;
+margin-right:auto;
 }
 
 /* footer */
@@ -145,21 +142,16 @@ font-size:14px;
 @media(max-width:768px){
 
 .header h1{
-font-size:34px;
+font-size:30px;
 }
 
 .avatar{
-width:110px;
-height:110px;
-}
-
-.main{
-width:140px;
-height:140px;
+width:100px;
+height:100px;
 }
 
 .students{
-gap:25px;
+gap:20px;
 }
 
 }
@@ -173,50 +165,114 @@ gap:25px;
 <div class="container">
 
 <div class="header">
-<h1>Student of The Week</h1>
-<div class="week">Week 1 — Introduction to Programming</div>
+<h1>Self Learning Achievers</h1>
+<div class="week">100% Completion — Week 1</div>
 </div>
 
 <div class="students">
 
 <div class="student">
 <div class="avatar">
-<img src="https://i.pravatar.cc/300?img=5">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Daniel">
 </div>
-<div class="label">Most Active</div>
-<div class="name">Sara Ali</div>
-</div>
-
-<div class="student">
-<div class="avatar main">
-<img src="https://i.pravatar.cc/300?img=12">
-</div>
-<div class="label">Student of Week</div>
-<div class="name">Ahmed Mohamed</div>
+<div class="label">100% Completed</div>
+<div class="name">Daniel Shady</div>
 </div>
 
 <div class="student">
 <div class="avatar">
-<img src="https://i.pravatar.cc/300?img=7">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jerome">
 </div>
-<div class="label">Most Improved</div>
-<div class="name">Omar Khaled</div>
-</div>
-
-<div class="student">
-<div class="avatar">
-<img src="https://i.pravatar.cc/300?img=9">
-</div>
-<div class="label">Creative Thinker</div>
-<div class="name">Mariam Hassan</div>
+<div class="label">100% Completed</div>
+<div class="name">Jerome Magdy</div>
 </div>
 
 <div class="student">
 <div class="avatar">
-<img src="https://i.pravatar.cc/300?img=11">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Malak">
 </div>
-<div class="label">Best Problem Solver</div>
-<div class="name">Youssef Ahmed</div>
+<div class="label">100% Completed</div>
+<div class="name">Malak Khaled</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Retal">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Retal Mohamed</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Merola">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Merola Ramy</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Philopater">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Philopater Khaled</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Yassin">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Yassin Mohamed</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Robert">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Robert Saeed</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Ziad">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Ziad Elsayed</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jessica">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Jessica Remon</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Mayar">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Mayar Ahmed</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Amr">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Amr Ehab</div>
+</div>
+
+<div class="student">
+<div class="avatar">
+<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Mohamed">
+</div>
+<div class="label">100% Completed</div>
+<div class="name">Mohamed Ebrahim</div>
 </div>
 
 </div>
