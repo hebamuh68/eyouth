@@ -1,288 +1,344 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Self Learning Achievers</title>
-
+<title>eYouth — Python Cohort Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Inter",sans-serif;
+:root {
+  --bg: #080f1e;
+  --card: rgba(255, 255, 255, 0.07);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #ffffff;
+  --text2: rgba(255, 255, 255, 0.7);
+  --text3: rgba(255, 255, 255, 0.4);
+  --status-gold: #fbbf24;
+  --status-green: #4ade80;
+  --status-blue: #38bdf8;
+  --status-red: #fb7185;
+  --accent-purple: #a78bfa;
+  --accent-teal: #2dd4bf;
+  --radius: 14px;
+  --radius-sm: 8px;
 }
 
-body{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-position:relative;
-overflow:hidden;
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #0d1f3c;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
 }
 
-body::before {
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:url("./background.jpg") no-repeat center center;
-background-size:cover;
-background-color:#0b1e3a;
-z-index:-1;
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13, 31, 60, 0.55);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--card-border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 70px;
 }
 
-/* container */
+.nav-brand { display: flex; align-items: center; gap: 12px; }
 
-.container{
-text-align:center;
-width:100%;
-max-width:1200px;
-padding:40px 20px;
+.nav-logo {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo img { width: 90%; height: 90%; object-fit: contain; display: block; }
+
+.nav-title  { font-size: 16px; font-weight: 700; line-height: 1.2; }
+.nav-subtitle { font-size: 11px; color: var(--text3); font-weight: 500; }
+
+.week-tabs {
+  display: flex; gap: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px; padding: 4px;
+}
+.week-tab {
+  padding: 6px 14px; border-radius: 7px; font-size: 13px; font-weight: 600;
+  color: var(--text2); cursor: pointer; border: none; background: none; transition: 0.2s;
+}
+.week-tab:hover:not(.locked) { color: var(--text); background: rgba(255,255,255,0.08); }
+.week-tab.active { background: var(--accent-purple); color: white; }
+.week-tab.locked { opacity: 0.4; cursor: not-allowed; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
+
+.section-header {
+  margin: 40px 0 20px;
+  display: flex; align-items: baseline; gap: 12px;
+  border-left: 4px solid var(--accent-purple);
+  padding-left: 16px;
+}
+.section-title { font-size: 22px; font-weight: 700; color: white; }
+.section-sub   { font-size: 13px; color: var(--text3); }
+
+.w1-hero { text-align: center; padding: 40px 20px 20px; margin-bottom: 10px; }
+.w1-hero h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.w1-hero p  { font-size: 15px; color: var(--text2); margin-bottom: 16px; }
+
+.w1-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+.w1-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 22px 12px 16px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.w1-card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,0.45); }
+.w1-avatar {
+  width: 70px; height: 70px; border-radius: 50%;
+  overflow: hidden; margin: 0 auto 12px;
+  border: 2px solid rgba(167,139,250,0.35);
+  background: #1e293b;
+}
+.w1-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.w1-name { font-size: 13px; font-weight: 600; color: white; margin-bottom: 8px; }
+.badge-done {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+  background: rgba(74,222,128,0.15);
+  color: var(--status-green);
+  border: 1px solid rgba(74,222,128,0.3);
 }
 
-/* header */
-
-.header{
-margin-bottom:50px;
+.best-code-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 24px;
 }
-
-.header h1{
-font-size:44px;
-font-weight:600;
+.improved-avatar {
+  width: 80px; height: 80px;
+  border: 3px solid var(--accent-purple);
+  border-radius: 50%; overflow: hidden; flex-shrink: 0;
 }
+.av-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.week{
-margin-top:8px;
-opacity:.8;
+.mvp-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.mvp-card {
+  background: var(--card); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 20px;
+  display: flex; align-items: center; gap: 15px;
 }
+.mvp-avatar { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--accent-purple); flex-shrink: 0; }
+.mvp-tag  { font-size: 10px; color: var(--accent-purple); font-weight: 800; text-transform: uppercase; margin-bottom: 2px; }
+.mvp-name { font-size: 15px; font-weight: 600; }
 
-/* students */
-
-.students{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:35px;
-flex-wrap:wrap;
-margin-top:40px;
+.group-card-long {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px; margin-bottom: 24px;
 }
-
-.student{
-text-align:center;
-transition:.3s;
+.group-header {
+  font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px; color: white;
+  text-transform: uppercase; letter-spacing: 0.05em;
 }
+.group-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-.student:hover{
-transform:translateY(-10px);
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
 }
-
-/* avatars */
-
-.avatar{
-width:120px;
-height:120px;
-border-radius:50%;
-overflow:hidden;
-margin:auto;
-border:4px solid rgba(255,255,255,.2);
-box-shadow:0 15px 35px rgba(0,0,0,.25);
-background:white;
+.student-item {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.05);
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
 }
+.mini-av { width: 32px; height: 32px; border-radius: 50%; background: #1e293b; flex-shrink: 0; }
+.s-name  { font-size: 13px; font-weight: 500; color: white; flex-grow: 1; }
+.tag-container { display: flex; gap: 4px; flex-shrink: 0; }
+.tag    { font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; color: #000; }
+.tag-w1 { background: #96fcbb; }
+.tag-w2 { background: #67e8f9; }
+.s-rate { font-size: 11px; color: var(--text3); font-weight: 700; flex-shrink: 0; }
 
-.avatar img{
-width:100%;
-height:100%;
-object-fit:cover;
+.coming-soon { text-align: center; padding: 100px 20px; color: var(--text3); }
+.coming-soon h3 { font-size: 18px; font-weight: 500; color: var(--text2); margin-bottom: 8px; }
+.coming-soon p  { font-size: 14px; }
+.lock-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.4; }
+
+@media(max-width: 768px) {
+  .mvp-row { grid-template-columns: 1fr; }
+  .week-tab { padding: 6px 10px; font-size: 12px; }
 }
-
-/* label */
-
-.label{
-margin-top:15px;
-padding:8px 18px;
-border-radius:30px;
-background:rgba(255,255,255,.12);
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,.2);
-font-size:13px;
-display:inline-block;
-}
-
-/* name */
-
-.name{
-margin-top:8px;
-font-weight:600;
-font-size:14px;
-max-width:150px;
-margin-left:auto;
-margin-right:auto;
-}
-
-/* footer */
-
-.footer{
-margin-top:50px;
-opacity:.7;
-font-size:14px;
-}
-
-/* responsive */
-
-@media(max-width:768px){
-
-.header h1{
-font-size:30px;
-}
-
-.avatar{
-width:100px;
-height:100px;
-}
-
-.students{
-gap:20px;
-}
-
-}
-
 </style>
-
 </head>
-
 <body>
 
-<div class="container">
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <img src="eyouth.png" alt="eYouth">
+    </div>
+    <div>
+      <div class="nav-title">DECI</div>
+      <div class="nav-subtitle">Digital Egypt Youth</div>
+    </div>
+  </div>
+  <div class="week-tabs">
+    <button class="week-tab" onclick="showWeek(1, this)">Week 1</button>
+    <button class="week-tab active" onclick="showWeek(2, this)">Week 2</button>
+    <button class="week-tab locked" onclick="return false">Week 3</button>
+  </div>
+</nav>
 
-<div class="header">
-<h1>Self Learning Achievers</h1>
-<div class="week">100% Completion — Week 1</div>
-</div>
+<main>
 
-<div class="students">
+  <div class="page" id="page-1">
+    <div class="w1-hero">
+      <h2>100% Completion — Week 1</h2>
+      <p>Every student crossed the finish line. A perfect start to the cohort.</p>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Daniel">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Daniel Shady</div>
-</div>
+    <div class="w1-grid">
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Daniel&backgroundColor=b6e3f4" alt="Daniel"></div><div class="w1-name">Daniel Shady</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jerome&backgroundColor=c0aede" alt="Jerome"></div><div class="w1-name">Jerome Magdy</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Malak&backgroundColor=ffdfbf" alt="Malak"></div><div class="w1-name">Malak Khaled</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Retal&backgroundColor=d1d4f9" alt="Retal"></div><div class="w1-name">Retal Mohamed</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Merola&backgroundColor=ffd5dc" alt="Merola"></div><div class="w1-name">Merola Ramy</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Philopater&backgroundColor=b6e3f4" alt="Philopater"></div><div class="w1-name">Philopater Khaled</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Yassin&backgroundColor=c0aede" alt="Yassin"></div><div class="w1-name">Yassin Mohamed</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Robert&backgroundColor=d1d4f9" alt="Robert"></div><div class="w1-name">Robert Saeed</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Ziad&backgroundColor=ffdfbf" alt="Ziad"></div><div class="w1-name">Ziad Elsayed</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jessica&backgroundColor=ffd5dc" alt="Jessica"></div><div class="w1-name">Jessica Remon</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mayar&backgroundColor=b6e3f4" alt="Mayar"></div><div class="w1-name">Mayar Ahmed</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Amr&backgroundColor=c0aede" alt="Amr"></div><div class="w1-name">Amr Ehab</div><span class="badge-done">100% Completed</span></div>
+      <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mohamed&backgroundColor=d1d4f9" alt="Mohamed"></div><div class="w1-name">Mohamed Ebrahim</div><span class="badge-done">100% Completed</span></div>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jerome">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Jerome Magdy</div>
-</div>
+    <p style="text-align:center; color:var(--text3); font-size:13px; margin-top:32px;">eYouth — Digital Egypt Youth</p>
+  </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Malak">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Malak Khaled</div>
-</div>
+  <div class="page active" id="page-2">
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Retal">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Retal Mohamed</div>
-</div>
+    <div class="section-header"><span class="section-title">Best Task Code</span></div>
+    <div class="best-code-card">
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div class="improved-avatar">
+          <img class="av-img" src="https://api.dicebear.com/9.x/lorelei/svg?seed=TopCoder&backgroundColor=c0aede" alt="Best code">
+        </div>
+        <div>
+          <h4 style="font-size:22px; color:white; margin:0;">???</h4>
+          <p style="font-size:13px; color:var(--text3); margin-top:4px;">Exceptional logic &amp; clean structure</p>
+        </div>
+      </div>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Merola">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Merola Ramy</div>
-</div>
+    <div class="section-header"><span class="section-title">Most Active During Live Lectures</span></div>
+    <div class="mvp-row">
+      <div class="mvp-card">
+        <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Amr&backgroundColor=c0aede" class="mvp-avatar" alt="Amr">
+        <div><div class="mvp-tag">Highly Engaged</div><div class="mvp-name">Amr Ehab</div></div>
+      </div>
+      <div class="mvp-card">
+        <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mamdouh&backgroundColor=ffdfbf" class="mvp-avatar" alt="Mamdouh">
+        <div><div class="mvp-tag">Top Contributor</div><div class="mvp-name">Mamdouh Mohamed</div></div>
+      </div>
+      <div class="mvp-card">
+        <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Merola&backgroundColor=ffd5dc" class="mvp-avatar" alt="Merola">
+        <div><div class="mvp-tag">Active Participant</div><div class="mvp-name">Merola Ramy</div></div>
+      </div>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Philopater">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Philopater Khaled</div>
-</div>
+    <div class="section-header">
+      <span class="section-title">Self-Learning Progress</span>
+      <span class="section-sub">all students · week 2</span>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Yassin">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Yassin Mohamed</div>
-</div>
+    <div class="group-card-long" style="border-top: 4px solid var(--status-green);">
+      <div class="group-header">
+        <div class="group-dot" style="background:var(--status-green);"></div>
+        Top Achievers (100% Completion)
+      </div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Daniel&backgroundColor=b6e3f4" class="mini-av" alt="Daniel"><span class="s-name">Daniel Shady</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jerome&backgroundColor=c0aede" class="mini-av" alt="Jerome"><span class="s-name">Jerome Magdy</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Malak&backgroundColor=ffdfbf" class="mini-av" alt="Malak"><span class="s-name">Malak Khaled</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Retal&backgroundColor=d1d4f9" class="mini-av" alt="Retal"><span class="s-name">Retal Mohamed</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Philopater&backgroundColor=b6e3f4" class="mini-av" alt="Philopater"><span class="s-name">Philopater Khaled</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Robert&backgroundColor=d1d4f9" class="mini-av" alt="Robert"><span class="s-name">Robert Saeed</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Ziad&backgroundColor=ffdfbf" class="mini-av" alt="Ziad"><span class="s-name">Ziad Elsayed</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jessica&backgroundColor=ffd5dc" class="mini-av" alt="Jessica"><span class="s-name">Jessica Remon</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mayar&backgroundColor=b6e3f4" class="mini-av" alt="Mayar"><span class="s-name">Mayar Ahmed</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mamdouh&backgroundColor=ffdfbf" class="mini-av" alt="Mamdouh"><span class="s-name">Mamdouh Mohamed</span><div class="tag-container"><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Perihan&backgroundColor=d1d4f9" class="mini-av" alt="Perihan"><span class="s-name">Perihan Ahmed</span><div class="tag-container"><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Amr&backgroundColor=c0aede" class="mini-av" alt="Amr"><span class="s-name">Amr Ehab</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedM&backgroundColor=ffd5dc" class="mini-av" alt="Ahmed M"><span class="s-name">Ahmed Mohamed</span><div class="tag-container"><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MostafaK&backgroundColor=c0aede" class="mini-av" alt="Mostafa K"><span class="s-name">Mostafa Khaled</span><div class="tag-container"><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MostafaH&backgroundColor=ffd5dc" class="mini-av" alt="Mostafa H"><span class="s-name">Mostafa Hussein</span><div class="tag-container"><span class="tag tag-w2">W2</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Hala&backgroundColor=d1d4f9" class="mini-av" alt="Hala"><span class="s-name">Hala Mostafa</span><div class="tag-container"><span class="tag tag-w2">W2</span></div></div>
+      </div>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Robert">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Robert Saeed</div>
-</div>
+    <div class="group-card-long" style="border-top: 4px solid var(--status-blue);">
+      <div class="group-header"><div class="group-dot" style="background:var(--status-blue);"></div>Active Progress (Above 50%)</div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Hamza&backgroundColor=ffdfbf" class="mini-av" alt="Hamza"><span class="s-name">Hamza Fathy</span><span class="s-rate">50%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MohamedE&backgroundColor=b6e3f4" class="mini-av" alt="Mohamed E"><span class="s-name">Mohamed Ebrahim</span><span class="s-rate">50%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Merola&backgroundColor=ffd5dc" class="mini-av" alt="Merola"><span class="s-name">Merola Ramy</span><span class="s-rate">50%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Yassin&backgroundColor=c0aede" class="mini-av" alt="Yassin"><span class="s-name">Yassin Mohamed</span><span class="s-rate">50%</span></div>
+      </div>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Ziad">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Ziad Elsayed</div>
-</div>
+    <div class="group-card-long" style="border-top: 4px solid var(--status-red);">
+      <div class="group-header"><div class="group-dot" style="background:var(--status-red);"></div>Needs a Push (Below 50%)</div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Rofida&backgroundColor=ffd5dc" class="mini-av" alt="Rofida"><span class="s-name">Rofida Y.</span><span class="s-rate">26.93%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Marwan&backgroundColor=c0aede" class="mini-av" alt="Marwan"><span class="s-name">Marwan H.</span><span class="s-rate">15.38%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedS&backgroundColor=b6e3f4" class="mini-av" alt="Ahmed S"><span class="s-name">Ahmed Ahmed</span><span class="s-rate">3.85%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Eyad&backgroundColor=ffdfbf" class="mini-av" alt="Eyad"><span class="s-name">Eyad Marwan</span><span class="s-rate">0%</span></div>
+      </div>
+    </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jessica">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Jessica Remon</div>
-</div>
+  </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Mayar">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Mayar Ahmed</div>
-</div>
+  <div class="page" id="page-3">
+    <div class="coming-soon">
+      <div class="lock-icon">🔒</div>
+      <h3>Week 3 isn't live yet</h3>
+      <p>Check back once the week wraps up — results will appear here.</p>
+    </div>
+  </div>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Amr">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Amr Ehab</div>
-</div>
+</main>
 
-<div class="student">
-<div class="avatar">
-<img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Mohamed">
-</div>
-<div class="label">100% Completed</div>
-<div class="name">Mohamed Ebrahim</div>
-</div>
+<footer style="text-align:center; padding:40px; color:var(--text3); font-size:11px;">
+  eYouth Digital Egypt Youth — 2026
+</footer>
 
-</div>
-
-<div class="footer">
-eYouth — Digital Egypt Youth
-</div>
-
-</div>
+<script>
+function showWeek(n, btn) {
+  if (btn.classList.contains('locked')) return;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + n).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 
 </body>
-
 </html>
