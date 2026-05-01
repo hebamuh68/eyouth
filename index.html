@@ -60,6 +60,23 @@ nav {
 .nav-title  { font-size: 16px; font-weight: 700; line-height: 1.2; }
 .nav-subtitle { font-size: 11px; color: var(--text3); font-weight: 500; }
 
+.nav-controls { display: flex; align-items: center; gap: 10px; }
+
+.nav-divider { width: 1px; height: 28px; background: var(--card-border); flex-shrink: 0; }
+
+.group-tabs {
+  display: flex; gap: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px; padding: 4px;
+}
+.group-tab {
+  padding: 6px 12px; border-radius: 7px; font-size: 12px; font-weight: 700;
+  color: var(--text2); cursor: pointer; border: none; background: none; transition: 0.2s;
+  letter-spacing: 0.03em;
+}
+.group-tab:hover { color: var(--text); background: rgba(255,255,255,0.08); }
+.group-tab.active { background: var(--accent-teal); color: #0d1f3c; }
+
 .week-tabs {
   display: flex; gap: 6px;
   background: rgba(255,255,255,0.05);
@@ -174,6 +191,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
 .tag    { font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; color: #000; }
 .tag-w1 { background: #96fcbb; }
 .tag-w2 { background: #67e8f9; }
+.tag-w4 { background: #fbbf24; }
 .s-rate { font-size: 11px; color: var(--text3); font-weight: 700; flex-shrink: 0; }
 
 .coming-soon { text-align: center; padding: 100px 20px; color: var(--text3); }
@@ -184,6 +202,8 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
 @media(max-width: 768px) {
   .mvp-row { grid-template-columns: 1fr; }
   .week-tab { padding: 6px 10px; font-size: 12px; }
+  .nav-controls { gap: 6px; }
+  .group-tab { padding: 6px 8px; font-size: 11px; }
 }
 </style>
 </head>
@@ -199,21 +219,30 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
       <div class="nav-subtitle">Digital Egypt Youth</div>
     </div>
   </div>
-  <div class="week-tabs">
-    <button class="week-tab" onclick="showWeek(1, this)">Week 1</button>
-    <button class="week-tab active" onclick="showWeek(2, this)">Week 2</button>
-    <button class="week-tab locked" onclick="return false">Week 3</button>
+  <div class="nav-controls">
+    <div class="group-tabs">
+      <button class="group-tab active" onclick="showGroup('g840', this)">G0840</button>
+      <button class="group-tab" onclick="showGroup('g804', this)">G0804</button>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="week-tabs">
+      <button class="week-tab" onclick="showWeek(1, this)">Week 1</button>
+      <button class="week-tab" onclick="showWeek(2, this)">Week 2</button>
+      <button class="week-tab locked" onclick="return false">Week 3</button>
+      <button class="week-tab active" onclick="showWeek(4, this)">Week 4</button>
+    </div>
   </div>
 </nav>
 
 <main>
 
-  <div class="page" id="page-1">
+  <!-- ===== G0840 ===== -->
+
+  <div class="page" id="page-g840-1">
     <div class="w1-hero">
       <h2>100% Completion — Week 1</h2>
       <p>Every student crossed the finish line. A perfect start to the cohort.</p>
     </div>
-
     <div class="w1-grid">
       <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Daniel&backgroundColor=b6e3f4" alt="Daniel"></div><div class="w1-name">Daniel Shady</div><span class="badge-done">100% Completed</span></div>
       <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jerome&backgroundColor=c0aede" alt="Jerome"></div><div class="w1-name">Jerome Magdy</div><span class="badge-done">100% Completed</span></div>
@@ -229,11 +258,11 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
       <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Amr&backgroundColor=c0aede" alt="Amr"></div><div class="w1-name">Amr Ehab</div><span class="badge-done">100% Completed</span></div>
       <div class="w1-card"><div class="w1-avatar"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mohamed&backgroundColor=d1d4f9" alt="Mohamed"></div><div class="w1-name">Mohamed Ebrahim</div><span class="badge-done">100% Completed</span></div>
     </div>
-
     <p style="text-align:center; color:var(--text3); font-size:13px; margin-top:32px;">eYouth — Digital Egypt Youth</p>
   </div>
 
-  <div class="page active" id="page-2">
+  <!-- G0840 Week 2 — original data restored -->
+  <div class="page" id="page-g840-2">
 
     <div class="section-header"><span class="section-title">Best Task Code</span></div>
     <div class="best-code-card">
@@ -297,7 +326,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
     <div class="group-card-long" style="border-top: 4px solid var(--status-blue);">
       <div class="group-header"><div class="group-dot" style="background:var(--status-blue);"></div>Active Progress (Above 50%)</div>
       <div class="student-grid">
-        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Hamza&backgroundColor=ffdfbf" class="mini-av" alt="Hamza"><span class="s-name">Hamza Fathy</span><span class="s-rate">50%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=HamzaF&backgroundColor=ffdfbf" class="mini-av" alt="Hamza F"><span class="s-name">Hamza Fathy</span><span class="s-rate">50%</span></div>
         <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MohamedE&backgroundColor=b6e3f4" class="mini-av" alt="Mohamed E"><span class="s-name">Mohamed Ebrahim</span><span class="s-rate">50%</span></div>
         <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Merola&backgroundColor=ffd5dc" class="mini-av" alt="Merola"><span class="s-name">Merola Ramy</span><span class="s-rate">50%</span></div>
         <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Yassin&backgroundColor=c0aede" class="mini-av" alt="Yassin"><span class="s-name">Yassin Mohamed</span><span class="s-rate">50%</span></div>
@@ -316,12 +345,198 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
 
   </div>
 
-  <div class="page" id="page-3">
+  <!-- G0840 Week 3 — locked -->
+  <div class="page" id="page-g840-3">
     <div class="coming-soon">
       <div class="lock-icon">🔒</div>
-      <h3>Week 3 isn't live yet</h3>
-      <p>Check back once the week wraps up — results will appear here.</p>
+      <h3>Week 3 data unavailable</h3>
+      <p>This week's results were not recorded.</p>
     </div>
+  </div>
+
+  <!-- G0840 Week 4 — current data -->
+  <div class="page active" id="page-g840-4">
+
+    <div class="section-header"><span class="section-title">Best Task Code</span></div>
+    <div class="best-code-card">
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div class="improved-avatar">
+          <img class="av-img" src="https://api.dicebear.com/9.x/lorelei/svg?seed=TopCoder&backgroundColor=c0aede" alt="Best code">
+        </div>
+        <div>
+          <h4 style="font-size:22px; color:white; margin:0;">???</h4>
+          <p style="font-size:13px; color:var(--text3); margin-top:4px;">Exceptional logic &amp; clean structure</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header"><span class="section-title">Most Active During Live Lectures</span></div>
+    <div class="mvp-row">
+      <div class="mvp-card">
+        <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jerome&backgroundColor=c0aede" class="mvp-avatar" alt="Jerome">
+        <div><div class="mvp-tag">Highly Engaged</div><div class="mvp-name">Jerome Magdy</div></div>
+      </div>
+      <div class="mvp-card">
+        <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jessica&backgroundColor=ffd5dc" class="mvp-avatar" alt="Jessica">
+        <div><div class="mvp-tag">Top Contributor</div><div class="mvp-name">Jessica Remon</div></div>
+      </div>
+      <div class="mvp-card">
+        <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=HamzaF&backgroundColor=ffdfbf" class="mvp-avatar" alt="Hamza">
+        <div><div class="mvp-tag">Active Participant</div><div class="mvp-name">Hamza Fathy</div></div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <span class="section-title">Self-Learning Progress</span>
+      <span class="section-sub">G0840 · week 4</span>
+    </div>
+
+    <div class="group-card-long" style="border-top: 4px solid var(--status-green);">
+      <div class="group-header">
+        <div class="group-dot" style="background:var(--status-green);"></div>
+        Top Achievers (100% Completion)
+      </div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=HamzaF&backgroundColor=ffdfbf" class="mini-av" alt="Hamza F"><span class="s-name">Hamza Fathy</span><div class="tag-container"><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jerome&backgroundColor=c0aede" class="mini-av" alt="Jerome"><span class="s-name">Jerome Magdy</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Merola&backgroundColor=ffd5dc" class="mini-av" alt="Merola"><span class="s-name">Merola Ramy</span><div class="tag-container"><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MostafaK&backgroundColor=c0aede" class="mini-av" alt="Mostafa K"><span class="s-name">Mostafa Khaled</span><div class="tag-container"><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Yassin&backgroundColor=c0aede" class="mini-av" alt="Yassin"><span class="s-name">Yassin Mohamed</span><div class="tag-container"><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Ziad&backgroundColor=ffdfbf" class="mini-av" alt="Ziad"><span class="s-name">Ziad Elsayed</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mayar&backgroundColor=b6e3f4" class="mini-av" alt="Mayar"><span class="s-name">Mayar Ahmed</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Amr&backgroundColor=c0aede" class="mini-av" alt="Amr"><span class="s-name">Amr Ehab</span><div class="tag-container"><span class="tag tag-w1">W1</span><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Hala&backgroundColor=d1d4f9" class="mini-av" alt="Hala"><span class="s-name">Hala Mostafa</span><div class="tag-container"><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedHussine&backgroundColor=ffd5dc" class="mini-av" alt="Ahmed H"><span class="s-name">Ahmed M. Hussine</span><div class="tag-container"><span class="tag tag-w2">W2</span><span class="tag tag-w4">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mohamed&backgroundColor=d1d4f9" class="mini-av" alt="Mohamed"><span class="s-name">Mohamed Ebrahim</span><div class="tag-container"><span class="tag tag-w4">W4</span></div></div>
+      </div>
+    </div>
+
+    <div class="group-card-long" style="border-top: 4px solid var(--status-blue);">
+      <div class="group-header"><div class="group-dot" style="background:var(--status-blue);"></div>Active Progress (Above 50%)</div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Daniel&backgroundColor=b6e3f4" class="mini-av" alt="Daniel"><span class="s-name">Daniel Shady</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Marwan&backgroundColor=c0aede" class="mini-av" alt="Marwan"><span class="s-name">Marwan Hamdy</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Malak&backgroundColor=ffdfbf" class="mini-av" alt="Malak"><span class="s-name">Malak Khaled</span><span class="s-rate">77.78%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Retal&backgroundColor=d1d4f9" class="mini-av" alt="Retal"><span class="s-name">Retal Mohamed</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedSobhy&backgroundColor=b6e3f4" class="mini-av" alt="Ahmed S"><span class="s-name">Ahmed Sobhy</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Philopater&backgroundColor=b6e3f4" class="mini-av" alt="Philopater"><span class="s-name">Philopater Khaled</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Robert&backgroundColor=d1d4f9" class="mini-av" alt="Robert"><span class="s-name">Robert Saeed</span><span class="s-rate">86.11%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mamdouh&backgroundColor=ffdfbf" class="mini-av" alt="Mamdouh"><span class="s-name">Mamdouh Mohamed</span><span class="s-rate">80.56%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Rofida&backgroundColor=ffd5dc" class="mini-av" alt="Rofida"><span class="s-name">Rofida Yasser</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Perihan&backgroundColor=d1d4f9" class="mini-av" alt="Perihan"><span class="s-name">Perihan Ahmed</span><span class="s-rate">60%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Jessica&backgroundColor=ffd5dc" class="mini-av" alt="Jessica"><span class="s-name">Jessica Remon</span><span class="s-rate">77.78%</span></div>
+      </div>
+    </div>
+
+    <div class="group-card-long" style="border-top: 4px solid var(--status-red);">
+      <div class="group-header"><div class="group-dot" style="background:var(--status-red);"></div>Needs a Push (Below 50%)</div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Eyad&backgroundColor=ffdfbf" class="mini-av" alt="Eyad"><span class="s-name">Eyad Marwan</span><span class="s-rate">3.85%</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== G0804 ===== -->
+
+  <div class="page" id="page-g804-1">
+    <div class="coming-soon">
+      <div class="lock-icon">📂</div>
+      <h3>No Week 1 data for G0804</h3>
+      <p>This group was assigned starting Week 4.</p>
+    </div>
+  </div>
+
+  <!-- G0804 Week 2 — not applicable (newly assigned group) -->
+  <div class="page" id="page-g804-2">
+    <div class="coming-soon">
+      <div class="lock-icon">📂</div>
+      <h3>No Week 2 data for G0804</h3>
+      <p>This group was assigned starting Week 4.</p>
+    </div>
+  </div>
+
+  <!-- G0804 Week 3 — locked -->
+  <div class="page" id="page-g804-3">
+    <div class="coming-soon">
+      <div class="lock-icon">🔒</div>
+      <h3>Week 3 data unavailable</h3>
+      <p>This week's results were not recorded.</p>
+    </div>
+  </div>
+
+  <!-- G0804 Week 4 — current data -->
+  <div class="page" id="page-g804-4">
+
+    <div class="section-header"><span class="section-title">Best Task Code</span></div>
+    <div class="best-code-card">
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div class="improved-avatar">
+          <img class="av-img" src="https://api.dicebear.com/9.x/lorelei/svg?seed=TopCoder804&backgroundColor=b6e3f4" alt="Best code">
+        </div>
+        <div>
+          <h4 style="font-size:22px; color:white; margin:0;">???</h4>
+          <p style="font-size:13px; color:var(--text3); margin-top:4px;">Exceptional logic &amp; clean structure</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <span class="section-title">Self-Learning Progress</span>
+      <span class="section-sub">G0804 · week 4</span>
+    </div>
+
+    <div class="group-card-long" style="border-top: 4px solid var(--status-green);">
+      <div class="group-header">
+        <div class="group-dot" style="background:var(--status-green);"></div>
+        Top Achievers (100% Completion)
+      </div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=RodinaA&backgroundColor=d1d4f9" class="mini-av" alt="Rodina A"><span class="s-name">Rodina Abdelrasoul</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Adam&backgroundColor=c0aede" class="mini-av" alt="Adam"><span class="s-name">Adam Mohamed</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Fady&backgroundColor=b6e3f4" class="mini-av" alt="Fady"><span class="s-name">Fady Wael</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedTamer&backgroundColor=ffd5dc" class="mini-av" alt="Ahmed T"><span class="s-name">Ahmed Tamer</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Retaj&backgroundColor=d1d4f9" class="mini-av" alt="Retaj"><span class="s-name">Retaj Mostafa</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedAbdelazim&backgroundColor=ffdfbf" class="mini-av" alt="Ahmed Az"><span class="s-name">Ahmed Abdelazim</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Sylvia&backgroundColor=b6e3f4" class="mini-av" alt="Sylvia"><span class="s-name">Sylvia Sameh</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=HamzaTaher&backgroundColor=ffd5dc" class="mini-av" alt="Hamza T"><span class="s-name">Hamza Taher</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Tima&backgroundColor=c0aede" class="mini-av" alt="Tima"><span class="s-name">Tima Hossam</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=YoussefR&backgroundColor=b6e3f4" class="mini-av" alt="Youssef R"><span class="s-name">Youssef Ramadan</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Mahmoud&backgroundColor=ffdfbf" class="mini-av" alt="Mahmoud"><span class="s-name">Mahmoud Ahmed</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=YoussefA&backgroundColor=d1d4f9" class="mini-av" alt="Youssef A"><span class="s-name">Youssef Amin</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedWagih&backgroundColor=ffd5dc" class="mini-av" alt="Ahmed W"><span class="s-name">Ahmed Wagih</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Giovanna&backgroundColor=c0aede" class="mini-av" alt="Giovanna"><span class="s-name">Giovanna Joseph</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MostafaI&backgroundColor=d1d4f9" class="mini-av" alt="Mostafa I"><span class="s-name">Mostafa Ibrahim</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AmrAdel&backgroundColor=ffdfbf" class="mini-av" alt="Amr A"><span class="s-name">Amr Adel</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=HalaMohamed&backgroundColor=c0aede" class="mini-av" alt="Hala M"><span class="s-name">Hala Mohamed</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Romysaa&backgroundColor=b6e3f4" class="mini-av" alt="Romysaa"><span class="s-name">Romysaa Mostafa</span><div class="tag-container"><span class="tag tag-w2">W4</span></div></div>
+      </div>
+    </div>
+
+    <div class="group-card-long" style="border-top: 4px solid var(--status-blue);">
+      <div class="group-header"><div class="group-dot" style="background:var(--status-blue);"></div>Active Progress (Above 50%)</div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Aseel&backgroundColor=ffdfbf" class="mini-av" alt="Aseel"><span class="s-name">Aseel Yasser</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Saja&backgroundColor=d1d4f9" class="mini-av" alt="Saja"><span class="s-name">Saja Abdelaleem</span><span class="s-rate">75%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Youssif&backgroundColor=c0aede" class="mini-av" alt="Youssif"><span class="s-name">Youssif Ahmed</span><span class="s-rate">77.78%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Sarah&backgroundColor=ffd5dc" class="mini-av" alt="Sara"><span class="s-name">Sara Mohamed</span><span class="s-rate">86.11%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=Asser&backgroundColor=b6e3f4" class="mini-av" alt="Asser"><span class="s-name">Asser Ibrahem</span><span class="s-rate">52.5%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MostafaY&backgroundColor=d1d4f9" class="mini-av" alt="Mostafa Y"><span class="s-name">Mostafa Yasser</span><span class="s-rate">50%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MohamedKareem&backgroundColor=ffdfbf" class="mini-av" alt="Mohamed K"><span class="s-name">Mohamed Kareem</span><span class="s-rate">50%</span></div>
+      </div>
+    </div>
+
+    <div class="group-card-long" style="border-top: 4px solid var(--status-red);">
+      <div class="group-header"><div class="group-dot" style="background:var(--status-red);"></div>Needs a Push (Below 50%)</div>
+      <div class="student-grid">
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=HamzaAhmed&backgroundColor=c0aede" class="mini-av" alt="Hamza A"><span class="s-name">Hamza A. Aboelhassan</span><span class="s-rate">35%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedHussien&backgroundColor=ffd5dc" class="mini-av" alt="Ahmed H"><span class="s-name">Ahmed M. Hussien</span><span class="s-rate">11.54%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=MohamedAbdullah&backgroundColor=b6e3f4" class="mini-av" alt="Mohamed A"><span class="s-name">Mohamed Abdullah</span><span class="s-rate">1.92%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=AhmedMahmoud&backgroundColor=b6e3f4" class="mini-av" alt="Ahmed M"><span class="s-name">Ahmed Mahmoud</span><span class="s-rate">0%</span></div>
+        <div class="student-item"><img src="https://api.dicebear.com/9.x/lorelei/svg?seed=RodinaI&backgroundColor=ffd5dc" class="mini-av" alt="Rodina I"><span class="s-name">Rodina Ibrahim</span><span class="s-rate">0%</span></div>
+      </div>
+    </div>
+
   </div>
 
 </main>
@@ -331,12 +546,27 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px; }
 </footer>
 
 <script>
+let currentGroup = 'g840';
+let currentWeek = 4;
+
+function showGroup(group, btn) {
+  currentGroup = group;
+  document.querySelectorAll('.group-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  updatePage();
+}
+
 function showWeek(n, btn) {
   if (btn.classList.contains('locked')) return;
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  currentWeek = n;
   document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + n).classList.add('active');
   btn.classList.add('active');
+  updatePage();
+}
+
+function updatePage() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + currentGroup + '-' + currentWeek).classList.add('active');
 }
 </script>
 
